@@ -7,8 +7,7 @@ import (
 	"strconv"
 )
 
-// 公約数を算出する
-// TODO: スニペット化する
+// 最大公約数を算出する
 func gcd(a, b int) int {
 	if b == 0 {
 		return a
@@ -20,14 +19,6 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(bufio.ScanWords)
 	scanner.Scan()
-	a, _ := strconv.Atoi(scanner.Text())
-	scanner.Scan()
-	b, _ := strconv.Atoi(scanner.Text())
-	scanner.Scan()
-	c, _ := strconv.Atoi(scanner.Text())
-
-	gcdValue := gcd(gcd(a, b), c)
-
-	ans := (a/gcdValue - 1) + (b/gcdValue - 1) + (c/gcdValue - 1)
-	fmt.Println(ans)
+	H, _ := strconv.Atoi(scanner.Text())
+	fmt.Println(H)
 }
