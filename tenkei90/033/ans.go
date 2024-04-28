@@ -35,5 +35,5 @@ func main() {
 		fmt.Println(h * w)
 		return
 	}
-	fmt.Println((h+1)/2 * (w+1)/2)
+	fmt.Println((h + 1) / 2 * ((w + 1) / 2))
 }
