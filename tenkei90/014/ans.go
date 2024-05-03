@@ -49,7 +49,7 @@ func main() {
 		scanner.Scan()
 		schools[i], _ = strconv.Atoi(scanner.Text())
 	}
-	
+
 	sort.Ints(students)
 	sort.Ints(schools)
 
