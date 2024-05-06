@@ -31,18 +31,17 @@ func abs(a int) int {
 	}
 	return -a
 }
-func min(a, b int) int {
-	if a < b {
-		return a
+func pow(a, b int) int {
+	result := 1
+	for i := 0; i < b; i++ {
+		result *= a
 	}
-	return b
+	return result
 }
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(bufio.ScanWords)
-	scanner.Scan()
-	n, _ := strconv.Atoi(scanner.Text())
 	scanner.Scan()
 	a, _ := strconv.Atoi(scanner.Text())
 	scanner.Scan()
@@ -50,19 +49,10 @@ func main() {
 	scanner.Scan()
 	c, _ := strconv.Atoi(scanner.Text())
 
-	ans := 10000
-	// a円、b円、c円の最小の組み合わせでn円を作る
-	for i := 0; i < 10000; i++ {
-		for j := 0; j < 10000-i; j++ {
-			// n円以上の場合はスキップ
-			if n < i*b+j*a {
-				break
-			}
-			if (n-i*b-j*a)%c == 0 {
-				// fmt.Println("a", j, "b", i, "c", (n-(i*b)-(j*a))/c)
-				ans = min(ans, i+j+(n-i*b-j*a)/c)
-			}
-		}
+	if a < pow(c, b) {
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
 	}
-	fmt.Println(ans)
+
 }
