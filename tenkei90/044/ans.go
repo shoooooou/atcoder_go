@@ -75,16 +75,13 @@ func main() {
 
 		scanner.Scan()
 		x, _ := strconv.Atoi(scanner.Text())
-		if x != n {
-			x = (x - 1 + shiftCnt) % n
-		}
+		x--
+		x = (x + shiftCnt) % n
 
 		scanner.Scan()
 		y, _ := strconv.Atoi(scanner.Text())
+		y--
 		y = (y + shiftCnt) % n
-		if y != n {
-			y = (y - 1 + shiftCnt) % n
-		}
 
 		if t == 1 {
 			swap(a, x, y)
