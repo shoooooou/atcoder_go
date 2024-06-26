@@ -15,6 +15,7 @@ func sumSlice(numbers []int) int {
 	}
 	return sum
 }
+
 // 最大公約数を算出する
 func gcd(a, b int) int {
 	if b == 0 {
@@ -54,10 +55,44 @@ func generate(n int, array []int, result *[][]int) {
 	}
 }
 
+const mod = 1e9 + 7
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Split(bufio.ScanWords)
 	scanner.Scan()
-	H, _ := strconv.Atoi(scanner.Text())
-	fmt.Println(H)
+	n, _ := strconv.Atoi(scanner.Text())
+	scanner.Scan()
+	k, _ := strconv.Atoi(scanner.Text())
+
+	if n == 1 {
+		fmt.Println(k)
+		return
+	}
+	if n == 2 {
+		if k == 1 {
+			fmt.Println(0)
+		} else {
+			fmt.Println((k * (k - 1)) % mod)
+		}
+		return
+	}
+	if k <= 2 {
+		fmt.Println("0")
+		return
+	}
+
+	var ans int
+	ans = ((k * (k - 1) % mod) * powMod(k-2, n-2)) % mod
+	fmt.Println(ans)
+}
+func powMod(x int, y int) int {
+	v, p := 1, x
+	for ; y > 0; y >>= 1 {
+		if y&1 == 1 {
+			v = (v * p) % mod
+		}
+		p = (p * p) % mod
+	}
+	return v
 }
