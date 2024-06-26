@@ -67,39 +67,36 @@ func main() {
 		scanner.Scan()
 		a[i], _ = strconv.Atoi(scanner.Text())
 	}
-	ans := calcHyoukoh(a)
-	// fmt.Println(ans)
-
-	for i := 0; i < q; i++ {
+	ans := 0
+	// 差分を格納するよう
+	b := make([]int, n-1)
+	for i := 0; i < n-1; i++ {
+		b[i] = a[i+1] - a[i]
+		ans += abs(b[i])
+	}
+	for i:=0;i<q;i++{
 		scanner.Scan()
 		l, _ := strconv.Atoi(scanner.Text())
-		scanner.Scan()
 		l--
+		scanner.Scan()
 		r, _ := strconv.Atoi(scanner.Text())
 		r--
 		scanner.Scan()
 		v, _ := strconv.Atoi(scanner.Text())
-		if l != 0{
-			fmt.Printf("left=bef:%v af:%v",abs(a[l-1]-a[l]),abs(a[l-1]-a[l]-v))
-			ans+=(abs(a[l-1]-a[l]-v)-abs(a[l-1]-a[l]))
+		var before int
+		var after int
+		if l!=0{
+			before+=abs(b[l-1])
+			b[l-1]+=v
+			after+=abs(b[l-1])
 		}
-		if r != (n-1){
-			ans+=(abs(a[r]+v-a[r-1])-abs(a[r]-a[r-1]))
-			fmt.Println("rans:",ans)
+		if r!=n-1{
+			before+=abs(b[r])
+			b[r]-=v
+			after+=abs(b[r])
 		}
+		ans+=after-before
 		fmt.Println(ans)
 	}
 
-}
-func calcHyoukoh(a []int) int {
-	sum := 0
-	for i := 0; i < len(a)-1; i++ {
-		tmp := a[i] - a[i+1]
-		if tmp < 0 {
-			sum += -tmp
-		} else {
-			sum += tmp
-		}
-	}
-	return sum
 }
