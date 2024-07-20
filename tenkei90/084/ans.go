@@ -61,37 +61,39 @@ func sum(a int) int {
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+	buf:=make([]byte,0, 60*1024)
+	scanner.Buffer(buf, 10*1024*1024)
 	scanner.Split(bufio.ScanWords)
 	scanner.Scan()
 	n, _ := strconv.Atoi(scanner.Text())
 	scanner.Scan()
 	s := scanner.Text()
-	oFlag:=false
-	xFlag:=false
-	subNum:=0
-	cnt:=0
-	for i:=0;i<n;i++{
-		if s[i]=='o'{
-			oFlag=true
-			if xFlag{
-				xFlag=false
-				subNum+=sum(cnt)
-				cnt=0
+	oFlag := false
+	xFlag := false
+	subNum := 0
+	cnt := 0
+	for _, char := range s {
+		if char == 'o' {
+			oFlag = true
+			if xFlag {
+				xFlag = false
+				subNum += sum(cnt)
+				cnt = 0
 			}
 			cnt++
-		}else{
-			xFlag=true
-			if oFlag{
-				oFlag=false
-				subNum+=sum(cnt)
-				cnt=0
+		} else {
+			xFlag = true
+			if oFlag {
+				oFlag = false
+				subNum += sum(cnt)
+				cnt = 0
 			}
 			cnt++
 		}
 	}
-	if cnt!=0{
-		subNum+=sum(cnt)
+	if cnt != 0 {
+		subNum += sum(cnt)
 	}
 	// fmt.Println(sum(n),subNum)
-	fmt.Println(sum(n)-subNum)
+	fmt.Println(sum(n) - subNum)
 }
